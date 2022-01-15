@@ -16,7 +16,7 @@ class Frame extends Event {
     imageMode(CORNER);
     image(background,0,0,1000,750);
     imageMode(CENTER);
-    image(score_text,400*ratio,110*ratio,80*ratio,40*ratio);
+    image(score_text,400*ratio,112*ratio,80*ratio,40*ratio);
   }
   
   void logo() {

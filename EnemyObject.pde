@@ -156,7 +156,7 @@ class EnemySoul extends Soul {
     fireball = new FireBall(gmobj.position.getPosition(),collider_size/2);
   }
   void render() {
-        display_flag = EventFlagList.get("Concentration").flag;
+       display_flag = EventFlagList.get("Concentration").flag && collision_flag;
        fireball.display_flag = display_flag;
        fireball.position = gmobj.position.getPosition();
        fireball.operate();

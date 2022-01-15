@@ -20,7 +20,8 @@ class PlayerBulletManager extends Event{
       if (key_input.KeyList.get("D").flag) angle += sp*base_speed;
       if(key_input.KeyList.get("A").flag && key_input.KeyList.get("D").flag)angle =-90;
       draw_aim(pl.position.getPosition(),130*ratio,angle,60*ratio,frameCount*2,50,time > 0);
-      if(time < 0 && key_input.KeyList.get("W").occurrence_flag && !pl.deadFlag && !EventFlagList.get("Communication").flag) {
+      //if(time < 0 && key_input.KeyList.get("W").occurrence_flag && !pl.deadFlag && !EventFlagList.get("Communication").flag) {
+        if(time < 0 && key_input.KeyList.get("W").occurrence_flag && !EventFlagList.get("Communication").flag) {
          time= 200;
          PlayerBullet plb = new PlayerBullet(pl.position.getPosition(),angle);
          addData.add(plb);
@@ -189,19 +190,20 @@ class PlayerBullet extends GameObject {
     popMatrix();
   }
   void collisionDetection(Soul target) {
-   
-      Position line_start,line_goal;
-      line_start = this.position.getPosition();
-      line_goal = update_Position(this.position.getPosition(),this.ang,this.speed);
-      /*
-      if(isCrossLines(a,b,c,d)) {
-        target.collision = true;
-      }*/
-      if(isCrossLinesCircle(line_start,line_goal,target)) {
-        target.collision = true;
-        this.destroyFlag = true;
-        //println(target,this,line_start.x,line_start.y,line_goal.x,line_goal.y,target.position.x,target.position.y,target.collider_size);
-      }
+     if(target.collision_flag) {
+        Position line_start,line_goal;
+        line_start = this.position.getPosition();
+        line_goal = update_Position(this.position.getPosition(),this.ang,this.speed);
+        /*
+        if(isCrossLines(a,b,c,d)) {
+          target.collision = true;
+        }*/
+        if(isCrossLinesCircle(line_start,line_goal,target)) {
+          target.collision = true;
+          this.destroyFlag = true;
+          //println(target,this,line_start.x,line_start.y,line_goal.x,line_goal.y,target.position.x,target.position.y,target.collider_size);
+        }
+     }
   }
   
 }

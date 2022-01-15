@@ -7,14 +7,29 @@ class Pause extends Event{
   PImage Pause_menu_ = pause_menu_;
   int phase = 0;
   boolean choiced_flag = false;
+  boolean option = false;
   Pause() {
     this.layer = 6;
     EventFlagList.get("Pause").write_in_flag = true;
     dark = new Darkening();
     ChoiceTextList  = new ArrayList<ChoiceText>();
+    Pause_menu_ = pause_menu_;
     ChoiceTextList.add(new Continue(320*ratio));
     ChoiceTextList.add(new ToTitle(360*ratio));
     ChoiceTextList.add(new Retry(400*ratio));
+  }
+  Pause(boolean option) {
+    //GameOver
+    println("GAMEOVER");
+    this.layer = 6;
+    this.option = option;
+    EventFlagList.get("Pause").write_in_flag = true;
+    Pause_menu_ = gameover;
+    dark = new Darkening();
+    ChoiceTextList  = new ArrayList<ChoiceText>();
+    ChoiceTextList.add(new ToTitle(360*ratio));
+    ChoiceTextList.add(new Retry(400*ratio));
+    c=1;
   }
   void operate() {
     dark.processing();
@@ -23,7 +38,7 @@ class Pause extends Event{
     tint(255,dark.alpha/100*255);
     
     //image(pause_menu,10,230,230,230);
-    image(pause_menu_,10*ratio,130*ratio,280*ratio,280*ratio);
+    image(Pause_menu_,10*ratio,130*ratio,280*ratio,280*ratio);
     if(phase == 1) {
       if (key_input.KeyList.get("UP").occurrence_flag) c--;
       if (key_input.KeyList.get("DOWN").occurrence_flag) c++;
@@ -43,10 +58,11 @@ class Pause extends Event{
       phase = min(phase,chtext.animator.phase);
       i++;
     }
-    if(phase == 1 && (key_input.KeyList.get("W").occurrence_flag || key_input.KeyList.get("ALT").occurrence_flag) && !choiced_flag) {
+    if(phase == 1 && (key_input.KeyList.get("W").occurrence_flag || (key_input.KeyList.get("ALT").occurrence_flag && !option)) && !choiced_flag) {
       if(key_input.KeyList.get("W").occurrence_flag){
         choiced_flag = true;
-        if(c!=0)blackout.FadeIn();  
+        if(c!=0)blackout.FadeIn();
+        if(option) EventFlagList.get("Gameover").write_in_flag = false;
       }
       Destroy();
     }

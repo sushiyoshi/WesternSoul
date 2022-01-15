@@ -55,6 +55,7 @@ class Stage0 extends Stage {
       image = boss_1;
       soul.fireball.in_cl = color(255);
       soul.fireball.out_cl = #ff8c00;
+      soul.collision_flag = false;
       
     }
     boolean isDestroy(boolean prev_flag) {
@@ -65,7 +66,7 @@ class Stage0 extends Stage {
         //EnemyAllDelete();
         EnemyBulletAllDelete();
         time = 0;
-        println("hp:" + hp);
+    //    println("hp:" + hp);
       }
       if(position.x > (WIDTH + MARGIN) || position.x < MARGIN*-0.5 || position.y > (HEIGHT + MARGIN) || position.y < MARGIN * -0.5) {
         prev_flag=true;
@@ -81,8 +82,10 @@ class Stage0 extends Stage {
       return prev_flag;
     }
     void render() {
+      float alpha = soul.collision_flag || step == 0 ? 255 : 50;
       noTint();
       imageMode(CENTER);
+      tint(255,alpha);
       image(image,position.x,position.y,size,size);
     }
     void operate() {
@@ -100,7 +103,7 @@ class Stage0 extends Stage {
             targetMode(new Position(160*ratio + random(-100,100),80*ratio + random(0,-20)),20,1.5*ratio);
           }
           if(time >= 50) {
-            
+            soul.collision_flag = false;
             for(int i = 0; i< 2; i++) {
               Position pos = position.getPosition();
               float ang = random(0,360);
@@ -123,6 +126,7 @@ class Stage0 extends Stage {
           }
           
           if(time >= 20 && time % 8 == 1 && time <= 100) {
+            soul.collision_flag = true;
              for(int i = 0;i<5;i++) {
                float aim_ang = aim(position,pl.position.getPosition());
                for(int j = 0; j<3; j++) {
@@ -136,6 +140,7 @@ class Stage0 extends Stage {
              }
           }
           if(time >= 100) {
+            soul.collision_flag = false;
              type++;
              time = 1;
           }
@@ -178,7 +183,7 @@ class Stage0 extends Stage {
           }
         }
       }else if(hp == 2) {
-        targetSkycolor.x = 0.9;
+        targetSkycolor.y = 0.5;
         if(time > 15) {
           if(time % 100 == 99) {
             for(int i = 0;i<5;i++) {
@@ -233,7 +238,7 @@ class Stage0 extends Stage {
       EnemyBullet2(Position pos, float ang,float speed) {
         super(pos);
         //this.image = BulletImage.get("bullet5-9");
-        this.image = oni;
+        this.image = cowboy;
         this.speed = speed*ratio;
         this.ang = ang;
         this.size = 110;
@@ -248,7 +253,7 @@ class Stage0 extends Stage {
     Enemy0(Position position,int hp) {
       super(position,hp);
       speed = 2.0*ratio;        
-      image = inu;
+      image = cowboy;
       size = 30.0*ratio;
       soul.collider_size = 5*ratio;
     }

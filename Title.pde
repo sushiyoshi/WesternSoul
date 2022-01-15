@@ -9,11 +9,12 @@ class Title extends Event {
   void operate() {
     background(50); 
     noTint();
-    textFont(serifFont);
-    textAlign(CORNER);
-    rectMode(CENTER);
-     
-    drawOutlineText("press the w key",200*ratio,200*ratio,23,255,0,sin(time/5)*255 - 255/2);
+    //textFont(serifFont);
+    //textAlign(CORNER);
+    //rectMode(CENTER);
+    imageMode(CENTER);
+    image(title,1000/2,750/2,620*ratio,620*ratio);
+     drawOutlineText("press the w key",250*ratio,400*ratio,25,255,0,sin(time/5)*255 - 255/2);
     if(blackout.endflag && start_flag) { 
       println("start");
       addEvent.add(new Initialize());
@@ -27,6 +28,11 @@ class Title extends Event {
     time++;
   }
 }
+
+class Choice {
+
+}
+
 //ゲームを始める際に実行される処理
 class Initialize extends Event {
   void operate() {

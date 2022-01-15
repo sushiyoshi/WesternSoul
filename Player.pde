@@ -1,7 +1,7 @@
 abstract class Player extends GameObject{
-  int hp=2,bomb=3,score=0;
-  boolean deadFlag = false;
-  boolean controlFlag = true;
+  int score=0;
+  //boolean deadFlag = false;
+  //boolean controlFlag = true;
   Player (Position position,float size,float speed) {
     this.position = position;
     this.size = size;
@@ -12,24 +12,28 @@ abstract class Player extends GameObject{
   }
   //座標の更新　及び表示
   void update() {
-      if(!deadFlag) {
-        if(soul.collision)  {
-          hp--;
-          deadFlag = true;
-          controlFlag = false;
-          time = 0;
-          position = new Position(WIDTH/2,HEIGHT);
-        }
-      } else {
-        deadProcessing();
-      }
-      if(controlFlag) {
+      //if(!deadFlag) {
+      //  if(soul.collision)  {
+      //    deadFlag = true;
+      //    controlFlag = false;
+      //    time = 0;
+      //    position = new Position(WIDTH/2,HEIGHT);
+      //  }
+      //} else {
+      //  deadProcessing();
+      //}
+      if(soul.collision) {
+        EventFlagList.get("Gameover").write_in_flag = true;
+        soul.collision = false;
+        destroyFlag = true;
+      }  
+      //if(controlFlag) {
         float sp = (key_input.KeyList.get("SHIFT").flag ? speed/2.5 : speed) * base_speed;
         if (key_input.KeyList.get("RIGHT").flag) position.x+=sp;
         if (key_input.KeyList.get("LEFT").flag) position.x-=sp;
         if (key_input.KeyList.get("UP").flag) position.y-=sp;
         if (key_input.KeyList.get("DOWN").flag) position.y+=sp;
-      }
+      //}
       position.x=max(position.x,35);
       position.x=min(position.x,WIDTH-5);
       position.y=max(position.y,25);
@@ -40,23 +44,24 @@ abstract class Player extends GameObject{
     if(deadFlag) stroke(200,10,70);
     else stroke(2,200,45);
     */
-    if(deadFlag) tint(200,150);
-    else noTint();
+    //if(deadFlag) tint(200,150);
+    //else noTint();
+    noTint();
     //float alpha = deadFlag ? 40 : 0;
     imageMode(CENTER);
     //image(oni,position.x,position.y,size,size);
     image(image,position.x,position.y,size,size);
   }
-  void deadProcessing() {
-    if(time < 60) {
-      position.y-=1.5*base_speed;
-    } else if(time == 150) {
-      deadFlag = false;
-    } else {
-      controlFlag = true;
-    }
-    soul.collision = false;
-  }
+  //void deadProcessing() {
+  //  if(time < 60) {
+  //    position.y-=1.5*base_speed;
+  //  } else if(time == 150) {
+  //    deadFlag = false;
+  //  } else {
+  //    controlFlag = true;
+  //  }
+  //  soul.collision = false;
+  //}
 }
 
 class Player0 extends Player {

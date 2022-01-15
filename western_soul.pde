@@ -60,8 +60,8 @@ ArrayList<Event> EventList  = new ArrayList<Event>();
 ArrayList<Event> addEvent = new ArrayList<Event>();
 
 //画像データ
-PImage frame_image,logo,player_text,bomb_text,score_text,window,oni,boss_1,life,hoshi,inu,background,
-oni_tatie,pause_menu,continue_,retry,return_to_title,pause_menu_,cowboy,title,concentration,reloading,player_tatie;
+PImage player_text,score_text,boss_1,background,
+pause_menu,continue_,retry,return_to_title,pause_menu_,cowboy,title,concentration,reloading,player_tatie,gameover,gamestart;
 //フォントデータ
 PFont stateFont,serifFont,pauseFont,scoreFont;
 
@@ -89,6 +89,7 @@ void setup() {
   EventFlagList.put("Communication",new EventState());
   EventFlagList.put("Concentration",new EventState());
   EventFlagList.put("Loading",new EventState());
+  EventFlagList.put("Gameover",new EventState());
   DestroyFlagList.put("Enemy",new EventState());
   DestroyFlagList.put("EnemyBullet",new EventState());
   //ローディング開始

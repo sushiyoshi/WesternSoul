@@ -12,20 +12,20 @@ class Load extends Event implements Runnable{
   public void run() {
     //logo = loadImage("western_soul.png");
     //logo = loadImage("western_soul_.png");
-    logo = loadImage("logo.png");
-    frame_image = loadImage("frame.png");
+    //logo = loadImage("logo.png");
+    //frame_image = loadImage("frame.png");
     score_text = loadImage("score_text.png");
-    player_text = loadImage("player_text.png");
-    bomb_text = loadImage("bomb_text.png");
-    window = loadImage("window.png");
-    oni = loadImage("oni.png");
-    life = loadImage("life.png");
-    hoshi = loadImage("hoshi.png");
+    //player_text = loadImage("player_text.png");
+    //bomb_text = loadImage("bomb_text.png");
+    //window = loadImage("window.png");
+    //oni = loadImage("oni.png");
+    //life = loadImage("life.png");
+    //hoshi = loadImage("hoshi.png");
     boss_1 = loadImage("cow.png");
-    inu = loadImage("inu.png");
+    //inu = loadImage("inu.png");
     background = loadImage("haikei.png");
-    oni_tatie = loadImage("oni_tatie.png");
-    pause_menu = loadImage("pause_menu.png");
+    //oni_tatie = loadImage("oni_tatie.png");
+    //pause_menu = loadImage("pause_menu.png");
     pause_menu_ = loadImage("pause_menu_.png");
     continue_ = loadImage("continue.png");
     retry = loadImage("retry.png");
@@ -35,6 +35,8 @@ class Load extends Event implements Runnable{
     title = loadImage("title2.png");
     reloading = loadImage("reloading.png");
     player_tatie = loadImage("player_tatie.png");
+    gameover = loadImage("gameover.png");
+    gamestart = loadImage("gamestart.png");
     
     stateFont = loadFont("AppleSDGothicNeo-Heavy-48.vlw");
     serifFont = createFont("MS PGothic.vlw",48,true);

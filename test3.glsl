@@ -89,8 +89,11 @@ void main()
     
     // color the scene
     vec3 sceneColor = col(ro, rd, norm, minDist, t);
+    //from: https://glslsandbox.com/e#78448.0
+    float tempx = mod(norm.x*3., 0.5) - 0.05;
+    if(uv.y > -0.1) tempx = 1.; 
+    float c = sign(tempx * (mod(uv.y*3.+time*0.1, 0.5) - 0.05))*0.03;
     
-    float c = sign((mod(norm.x*3., 0.5) - 0.05) * (mod(uv.y*3.+time*0.1, 0.5) - 0.05))*0.03;
     sceneColor += vec3(c);
     
     gl_FragColor = vec4(sqrt(clamp(sceneColor, 0.0, 1.0)), 1.0);

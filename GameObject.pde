@@ -88,6 +88,9 @@ class GameObjectDrawing extends Event {
     if(!EventFlagList.get("Pause").flag && key_input.KeyList.get("ALT").occurrence_flag && EventFlagList.get("Game").flag) {
       addEvent.add(new Pause());
     }
+    if(EventFlagList.get("Gameover").occurrence_flag) {
+      addEvent.add(new Pause(true));
+    }
     destroyFlag = !EventFlagList.get("Game").flag;
   }
 }

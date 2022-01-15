@@ -4,6 +4,7 @@ class Soul {
     int objType;
     int collider_target;
     boolean collision = false;
+    boolean collision_flag = true;
     FireBall fireball;
     GameObject gmobj;
     
@@ -30,7 +31,7 @@ class Soul {
        
     }
     void collisionDetection(Soul target,int targetType) {
-      if(collider_target == targetType) {
+      if(collider_target == targetType && target.collision_flag) {
         float size = target.collider_size+this.collider_size; 
         if(isCollision(target.position,this.position,size)) {
           target.collision = true;
