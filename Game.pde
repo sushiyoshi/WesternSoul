@@ -25,8 +25,8 @@ class Stage0 extends Stage {
           new Serif("その侵略者がなぜ俺なんかに？","gunman"),
           new Serif("お前はこの土地で一番の腕を持つガンマンだと聞いた","Gozu"),
           new Serif("つまりお前を倒せば我ら「弾幕ガンマン」の力は絶対的なものになる","Gozu"),
-          new Serif("これからは弾幕の時代","Gozu"),
-          new Serif("旧世代のガンマンは侵略の邪魔だ！\nここで散るべし！","Gozu"),
+          new Serif("弾幕文化の拡大は\n神より与えられた我らの使命！","Gozu"),
+          new Serif("旧世代のガンマンなど\nこの手で葬り去ってくれる！","Gozu"),
         };
         Picture[] pic = {
           new Picture(player_tatie,"gunman",true),
@@ -36,7 +36,7 @@ class Stage0 extends Stage {
         addEvent.add(new Communication(serif,pic));
         //EnemyAllDelete();
         //EnemyBulletAllDelete();
-        Boss boss = new Boss(new Position(10,10),6);
+        Boss boss = new Boss(new Position(10,80*ratio),3);
         addData.add(boss);
       }
       if(time > 0 && !EventFlagList.get("Pause").flag && !EventFlagList.get("Communication").flag) {
@@ -49,6 +49,11 @@ class Stage0 extends Stage {
   class Boss extends Enemy {
     int type = 0;
     int count = 0;
+    float img_ang = 0;
+    float target_img_ang = 0;
+    float target_alpha = 255;
+    float alpha = 255;
+    MagicCircle magicCircle;
     Boss(Position position,int hp) {
       super(position,hp);
       size = 80.0*ratio;
@@ -56,7 +61,50 @@ class Stage0 extends Stage {
       soul.fireball.in_cl = color(255);
       soul.fireball.out_cl = #ff8c00;
       soul.collision_flag = false;
-      
+      magicCircle = new MagicCircle();
+    }
+    class MagicCircle {
+      Position position;
+      float ang = 0;
+      float size = 300;
+      Position outer_position;
+      MagicCircle() {
+        position = Boss.this.position.getPosition();
+        outer_position = position.getPosition();
+      }
+      void operate() {
+        update();
+        render();
+      }
+      void update() {
+        position.x = Boss.this.position.x;
+        position.y = Boss.this.position.y;
+        println(position.x-outer_position.x);
+        outer_position.x += (position.x-outer_position.x)/10;
+        outer_position.y += (position.y-outer_position.y)/10;
+      }
+      void render() {
+        stroke(80,100);
+        noFill();
+        //tint(255,10);
+        //strokeWeight(10);
+        //ellipse(position.x,position.y,size,size);
+        ang +=0.5;
+        
+        pushMatrix();
+        //translate( position.x + img.width/2, position.y + img.height/2 );
+        translate( position.x , position.y );
+        rotate(rad(ang));
+        imageMode(CENTER);
+        tint(255,100);
+        image(magic_circle,0,0,size,size);
+        popMatrix();
+        
+        strokeWeight(10);
+        ellipse(outer_position.x,outer_position.y,size*1.5,size*1.5);
+        
+      }
+     
     }
     boolean isDestroy(boolean prev_flag) {
       if(soul.collision) {
@@ -66,7 +114,8 @@ class Stage0 extends Stage {
         //EnemyAllDelete();
         EnemyBulletAllDelete();
         time = 0;
-    //    println("hp:" + hp);
+        soul.collision_flag = false;
+        println("hp:" + hp);
       }
       if(position.x > (WIDTH + MARGIN) || position.x < MARGIN*-0.5 || position.y > (HEIGHT + MARGIN) || position.y < MARGIN * -0.5) {
         prev_flag=true;
@@ -82,18 +131,28 @@ class Stage0 extends Stage {
       return prev_flag;
     }
     void render() {
-      float alpha = soul.collision_flag || step == 0 ? 255 : 50;
-      noTint();
+      target_alpha = soul.collision_flag || step == 0 ? 255 : 0;
+      target_img_ang = soul.collision_flag || step == 0 ? 0 : 90;
+      img_ang += (target_img_ang-img_ang)/10;
+      alpha += (target_alpha-alpha)/10;
+      drawAfterImageFlag = soul.collision_flag;
+      
+      pushMatrix();
+      //translate( position.x + img.width/2, position.y + img.height/2 );
+      translate( position.x , position.y );
+      rotate(rad(img_ang));
       imageMode(CENTER);
       tint(255,alpha);
-      image(image,position.x,position.y,size,size);
+      image(image,0,0,size,size);
+      popMatrix();
+      magicCircle.operate();
     }
     void operate() {
       if(step == 0) {
-        targetMode(new Position(160*ratio,80*ratio),20,1.5*ratio);
+        targetMode(new Position(160*ratio,80*ratio),10,5*ratio);
         time=0;
       }
-      if(hp == 6) {
+      if(hp == 3) {
         if(time == 0) {
           type = 0;
         }
@@ -165,24 +224,36 @@ class Stage0 extends Stage {
             createObject(bl);
           }*/
         }
-      } else if(hp == 4) {
+      } else if(hp == 2) {
+        if(time == 0) {
+          soul.collision_flag = false;
+          targetMode(new Position(160*ratio + random(-100,100),80*ratio + random(0,-20)),20,1.5*ratio);
+        }
         targetSkycolor.z = 0.0;
-        if(time > 15) {
-          if(time % 100 == 99) {
-            for(int i = 0;i<5;i++) {
-               float aim_ang = aim(position,pl.position.getPosition());
-               for(int j = 0; j<3; j++) {
-                 Position pos = position.getPosition();
-                 float ang = aim_ang + (i*20-40);
-                 pos.x += cos(rad(ang)) * 15*ratio;
-                 pos.y += sin(rad(ang)) * 15*ratio;
-                 EnemyBullet bl = new EnemyBullet1(pos,ang,j*0.5+3);
-                 createObject(bl);
-               }
-             }
+        
+        if(time == 300) {
+          Position target_pos = new Position(WIDTH/2,HEIGHT-300);
+          for(int i = 0; i< 6; i++) {
+            Position ipos = target_pos.getPosition();
+            ipos.x += cos(rad(i*60)) * 30*ratio;
+            ipos.y += sin(rad(i*60)) * 30*ratio;
+            EnemyBullet bl  =  new EnemyBullet4(position.getPosition(),i*60,2,80,i*2,ipos.getPosition());
+            createObject(bl);
           }
         }
-      }else if(hp == 2) {
+        if(time > 250) {
+          soul.collision_flag = 1100 < time % 1200 && time % 1200 < 1200;
+          if(time % 12 == 9) {
+            for(int i = 0; i< 8; i++) {
+              EnemyBullet bl  =  new EnemyBullet5(position.getPosition(),i*45 + sin(time*0.1)*90.0,3,time%120/10);
+              createObject(bl);
+            }
+          }
+          if(time % 500 == 499) {
+            targetMode(new Position(160*ratio + random(-100,100),80*ratio + random(0,-20)),20,1.5*ratio);
+          }
+        }
+      }else if(hp == 1) {
         targetSkycolor.y = 0.5;
         if(time > 15) {
           if(time % 100 == 99) {
@@ -246,6 +317,95 @@ class Stage0 extends Stage {
         ValidEnemyBulletList.add(this);
         soul.collider_size = 40;
         
+      }
+    }
+    
+    class EnemyBullet3 extends EnemyBullet {
+      int phase = 0;
+      int col = 0;
+      EnemyBullet3(Position pos,float ang,float speed,int col) {
+        super(pos);
+        //this.image = BulletImage.get("bullet5-9");
+        this.speed = speed*ratio;
+        this.ang = ang;
+        this.col = col;
+        image = BulletImage.get("bullet2-" + Integer.toString(col));
+      }
+      void operate() {
+        if(phase == 0) {
+          if(position.x > WIDTH+15 || position.x < 10 || position.y > HEIGHT-10 || position.y < 10) {
+            phase = 1;
+            image = BulletImage.get("bullet7-" + Integer.toString(col));
+            ang = aim(position,pl.position.getPosition());
+            speed = 0;
+            time =0;
+          }
+        } else if(phase == 1) {
+          if(time > 50) {
+            speed = 4;
+          }
+        }
+      }
+      void render() {
+        imageMode(CENTER);
+        noTint();
+        pushMatrix();
+        translate( position.x , position.y );
+        rotate(rad(ang+90));
+        imageMode(CENTER);
+        if(phase == 1)image(image,0,0,size,size*1.4); else image(image,0,0,size,size);
+        popMatrix();
+      }
+    }
+    
+    class EnemyBullet4 extends EnemyBullet {
+      int phase = 0;
+      Position target_pos;
+      int k = 0;
+      int col;
+      EnemyBullet4(Position pos,float ang,float speed,float size,int col,Position target_pos) {
+        super(pos);
+        //this.image = BulletImage.get("bullet5-9");
+        this.speed = speed*ratio;
+        this.ang = ang;
+        image = gozu;
+        this.size = size;
+        this.target_pos = target_pos;
+        this.col = col;
+        soul.collider_size = size/40;
+      }
+      void operate() {
+        if(phase == 0) {
+          if(time > 10) {
+            phase = 1;
+          }
+        } else if(phase == 1) {
+          targetMode(target_pos.getPosition(),10,5*ratio);
+          if(time > 120) {
+            phase = 2;
+          }
+        } else if(phase == 2) {
+          if(time % 10 == 1) {
+            for(int i = 0; i< 2; i++) {
+              Position pos = position.getPosition();
+              float ang = k + i * 180;
+              pos.x += cos(rad(ang)) * 20*ratio;
+              pos.y += sin(rad(ang)) * 20*ratio;
+              EnemyBullet bl  = new EnemyBullet3(pos,ang,5,col);
+              createObject(bl);
+            }
+            k+=4;
+          }
+        }
+      }
+    }
+    class EnemyBullet5 extends EnemyBullet {
+      EnemyBullet5(Position pos,float ang,float speed,int col) {
+          super(pos);
+          this.ang = ang;
+          this.speed = speed*ratio;
+          image = BulletImage.get("bullet5-" + Integer.toString(col));
+          soul.collider_size = size/20;
       }
     }
   }

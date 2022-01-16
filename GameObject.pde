@@ -35,7 +35,6 @@ abstract class GameObject {
     imageMode(CENTER);
     noTint();
     if(image != null)image(image,position.x,position.y,size,size);
-    
   }
   boolean isDestroy(boolean prev_flag) {
     if(position.x > (WIDTH + MARGIN) || position.x < MARGIN*-0.5 || position.y > (HEIGHT + MARGIN) || position.y < MARGIN * -0.5) {

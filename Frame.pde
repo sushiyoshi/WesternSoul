@@ -1,5 +1,6 @@
 class Frame extends Event {
-  float ang = 40,alpha = 0,frame = 40;
+  float alpha = 0,frame = 40;
+  TitleLogo logo = new TitleLogo(new Position(1000/2*ratio,620/2*ratio),620*ratio);
   Frame() {
     this.layer = 10;
   }
@@ -20,7 +21,7 @@ class Frame extends Event {
   }
   
   void logo() {
-    ang += (0-ang)/frame;
+    //ang += (0-ang)/frame;
     alpha += (255-alpha)/frame;
     tint(255,alpha);
     
@@ -31,8 +32,9 @@ class Frame extends Event {
     imageMode(CENTER);
     //image(logo,0,0,300,200);
     //image(title,0,0,300*ratio,300*ratio);
-    image(title,1000/2*ratio,620/2*ratio,620*ratio,620*ratio);
+    //image(title,1000/2*ratio,620/2*ratio,620*ratio,620*ratio);
     //popMatrix();
+    logo.render();
   }
   void score() {
     textFont(stateFont);

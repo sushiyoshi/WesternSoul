@@ -31,7 +31,7 @@ class ScoreText extends Effect {
 class Score extends GameObject{
   Position target_position;
   float speed =  20;
-  int score = 10000;
+  int score = 100000;
   float size = 20;
   Score(Position pos,int score) {
     this.position =pos;
@@ -89,4 +89,8 @@ class ScoreSoul extends Soul {
         }
       }
   }
+}
+
+class ScoreText_Center {
+
 }

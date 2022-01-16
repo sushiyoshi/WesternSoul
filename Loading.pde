@@ -37,7 +37,15 @@ class Load extends Event implements Runnable{
     player_tatie = loadImage("player_tatie.png");
     gameover = loadImage("gameover.png");
     gamestart = loadImage("gamestart.png");
-    
+    gozu = loadImage("172840.png");
+    magic_circle = loadImage("aiueo.png");
+    title2_gunman_shadow = loadImage("title2_gunman_shadow.png");
+    title2_text_shadow = loadImage("title2_text_shadow.png");
+    title2_gun_shadow = loadImage("title2_gun_shadow.png");
+    title2_text_eng = loadImage("title2_text_eng.png");
+    title2_gun = loadImage("title2_gun.png");
+    title2_text = loadImage("title2_text.png");
+    title2_gunman = loadImage("title2_gunman.png");
     stateFont = loadFont("AppleSDGothicNeo-Heavy-48.vlw");
     serifFont = createFont("MS PGothic.vlw",48,true);
     //serifFont = loadFont("AppleMyungjo-48.vlw");
@@ -45,6 +53,7 @@ class Load extends Event implements Runnable{
     //pauseFont = loadFont("HanziPenSC-W5-48.vlw");
     pauseFont = loadFont("HannotateSC-W5-48.vlw");
     scoreFont = loadFont("Beirut-48.vlw");
+    
     //serifFont = loadFont("HannotateSC-W5-48.vlw");
     textFont(serifFont, 48);
     for(int i = 0; i<=7;i++) {
@@ -63,8 +72,7 @@ class Load extends Event implements Runnable{
     EventFlagList.get("Loading").write_in_flag = false;
     destroyFlag = true;
     blackout = new BlackOut(BlackState.Stable);
-    addEvent.add(blackout);
-    addEvent.add(new Title());
+    
   }
   //ローディング画面の描画
   void operate() {

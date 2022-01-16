@@ -8,7 +8,7 @@ class Concentration extends Event {
   }
   void operate() {
     base_speed = 0.25;
-    if((key_input.KeyList.get("SPACE").change_flag && !EventFlagList.get("Pause").flag) || concentration_power <= 0) {
+    if((key_input.KeyList.get("SPACE").change_flag && !EventFlagList.get("Pause").flag) || concentration_power <= 0 || EventFlagList.get("Gameover").flag) {
       EventFlagList.get("Concentration").write_in_flag = false;
       destroyFlag=true;
       base_speed = 1;
@@ -28,7 +28,7 @@ class Concentration_Manager extends Event{
   Position position;
   Concentration_Manager() {
     layer = -1;
-    concentration_power = 500;
+    concentration_power = 200;
   }
   void update() {
     if(!EventFlagList.get("Pause").flag) {

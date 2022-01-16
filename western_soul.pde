@@ -55,13 +55,15 @@ ArrayList<GameObject> objData;
 ArrayList<GameObject> addData = new ArrayList<GameObject>();;
 
 //全イベントオブジェクトのリスト
-ArrayList<Event> EventList  = new ArrayList<Event>();
+ArrayList<Event> EventList;
 //後でEventListに追加するイベントオブジェクトを保存しておく。
-ArrayList<Event> addEvent = new ArrayList<Event>();
+ArrayList<Event> addEvent;
 
 //画像データ
 PImage player_text,score_text,boss_1,background,
-pause_menu,continue_,retry,return_to_title,pause_menu_,cowboy,title,concentration,reloading,player_tatie,gameover,gamestart;
+pause_menu,continue_,retry,return_to_title,pause_menu_,cowboy,title,concentration,
+reloading,player_tatie,gameover,quit,gamestart,
+title2_gunman_shadow,title2_text_shadow,title2_gun_shadow,title2_text_eng,title2_gun,title2_text,title2_gunman,gozu,magic_circle;
 //フォントデータ
 PFont stateFont,serifFont,pauseFont,scoreFont;
 
@@ -76,6 +78,8 @@ HashMap<String,EventState> DestroyFlagList = new HashMap<String,EventState>();
 EventStateManager esm = new EventStateManager();
 
 void setup() {
+  addEvent = new ArrayList<Event>();
+  EventList  = new ArrayList<Event>();
   //WIDTH *= ratio;
   //HEIGHT *= ratio;
   size(1000,750,P2D);
@@ -103,19 +107,22 @@ void draw() {
       concentration_power-=50;
       addEvent.add(new Concentration());
     }
+    if(EventFlagList.get("Loading").change_flag && !EventFlagList.get("Loading").flag) {
+      addEvent.add(blackout);
+      addEvent.add(new Title());
+    }
     //全イベントオブジェクトの処理を実行する。
     Iterator<Event> it_event = EventList.iterator();
-    int i=0;
     while(it_event.hasNext()) {
+      //println(millis());
       Event ev = it_event.next();
       //イベントオブジェクトの処理関数
       ev.operate();
       //消去フラグが立っていたら、消去
       if(ev.destroyFlag) {
         it_event.remove();
-        //println("remove",ev);
+        println("remove",ev);
       }
-      i++;
     }
     boolean sort_flag = false;
     //新たなイベントオブジェクトを追加する。
@@ -124,7 +131,7 @@ void draw() {
       sort_flag = true;
       Event ev = it_event.next();
       EventList.add(ev);
-      //println("add",ev);
+      println("add",ev);
     }
     //イベントオブジェクトの追加処理が行われたら、レイヤ順にソートを行い、描画順序を更新する。
     if(sort_flag) Collections.sort(EventList,new EventComparator());
@@ -141,4 +148,5 @@ void draw() {
     //追加予約用リストを初期化
     addEvent  = new ArrayList<Event>();
     addData  = new ArrayList<GameObject>();
+  
 }

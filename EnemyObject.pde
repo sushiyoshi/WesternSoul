@@ -72,6 +72,7 @@ abstract class Stage extends Event {
   int hp;
   float defeatScore = 1000;
   float shotScore = 100;
+  boolean drawAfterImageFlag = true;
   Enemy(Position position,int hp) {
     this.position = position;
     this.hp = hp;
@@ -105,7 +106,7 @@ abstract class Stage extends Event {
       //time = (time - time) < base_speed ? time : 0;
     }
     render();
-    drawAfterimage();
+    if(drawAfterImageFlag)drawAfterimage();
     //if(soul != null)soul.operate();
     
     destroyFlag |= DestroyFlagList.get("Enemy").change_flag;
