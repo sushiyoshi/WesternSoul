@@ -127,6 +127,7 @@ class Initialize extends Event {
     addEvent.add(new Concentration_Manager());
     addEvent.add(new PlayerBulletManager());
     addEvent.add(new SoulManager());
+    addEvent.add(new ScoreText_Center_Maneger());
     EventFlagList.get("Concentration").write_in_flag = false;
     destroyFlag = true;
     blackout.FadeOut();

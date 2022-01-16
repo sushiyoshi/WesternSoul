@@ -79,7 +79,6 @@ class Stage0 extends Stage {
       void update() {
         position.x = Boss.this.position.x;
         position.y = Boss.this.position.y;
-        println(position.x-outer_position.x);
         outer_position.x += (position.x-outer_position.x)/10;
         outer_position.y += (position.y-outer_position.y)/10;
       }
@@ -115,7 +114,8 @@ class Stage0 extends Stage {
         EnemyBulletAllDelete();
         time = 0;
         soul.collision_flag = false;
-        println("hp:" + hp);
+        println("hp:" + hp);  
+        bonus.new_score();
       }
       if(position.x > (WIDTH + MARGIN) || position.x < MARGIN*-0.5 || position.y > (HEIGHT + MARGIN) || position.y < MARGIN * -0.5) {
         prev_flag=true;
@@ -231,7 +231,7 @@ class Stage0 extends Stage {
         }
         targetSkycolor.z = 0.0;
         
-        if(time == 300) {
+        if(time == 150) {
           Position target_pos = new Position(WIDTH/2,HEIGHT-300);
           for(int i = 0; i< 6; i++) {
             Position ipos = target_pos.getPosition();
@@ -241,8 +241,8 @@ class Stage0 extends Stage {
             createObject(bl);
           }
         }
-        if(time > 250) {
-          soul.collision_flag = 1100 < time % 1200 && time % 1200 < 1200;
+        if(time > 400) {
+          soul.collision_flag = 200 < time % 1000 && time % 1000 < 300;
           if(time % 12 == 9) {
             for(int i = 0; i< 8; i++) {
               EnemyBullet bl  =  new EnemyBullet5(position.getPosition(),i*45 + sin(time*0.1)*90.0,3,time%120/10);

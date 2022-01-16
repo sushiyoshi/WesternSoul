@@ -105,7 +105,7 @@ class Afterimage extends Effect {
   }
 }
 
-void drawOutlineText(String text, float x, float y, float size, int fgColor, int bgColor,float alpha) {
+void drawOutlineText(String text, float x, float y, float size, color fgColor, color bgColor,float alpha) {
   float outlineWidth = (float)(size / 24.0);
   textSize(size);
   fill(bgColor,alpha);

@@ -22,10 +22,11 @@ class PlayerBulletManager extends Event{
       draw_aim(pl.position.getPosition(),130*ratio,angle,60*ratio,frameCount*2,50,time > 0);
       //if(time < 0 && key_input.KeyList.get("W").occurrence_flag && !pl.deadFlag && !EventFlagList.get("Communication").flag) {
         if(time < 0 && key_input.KeyList.get("W").occurrence_flag && !EventFlagList.get("Communication").flag) {
-         time= 200;
+         time= 300;
          PlayerBullet plb = new PlayerBullet(pl.position.getPosition(),angle);
          addData.add(plb);
          PlayerBulletList.add(plb);
+         bonus.hard_shot = floor(abs(abs(angle)-90)) * 100000000;
       }
     }
     destroyFlag = !EventFlagList.get("Game").flag;

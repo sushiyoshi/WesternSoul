@@ -1,5 +1,6 @@
 class Frame extends Event {
   float alpha = 0,frame = 40;
+  int disp_score = 0;
   TitleLogo logo = new TitleLogo(new Position(1000/2*ratio,620/2*ratio),620*ratio);
   Frame() {
     this.layer = 10;
@@ -37,9 +38,10 @@ class Frame extends Event {
     logo.render();
   }
   void score() {
+    disp_score += (pl.score - disp_score) /20;
     textFont(stateFont);
     textAlign(CORNER);
-    String score_text = Integer.toString(pl.score);
+    String score_text = Integer.toString(disp_score);
     int len = score_text.length();
     for(int i = 12; i > len && i > 0; i--) {
       score_text = '0' + score_text;

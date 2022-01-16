@@ -52,7 +52,7 @@ class Position {
 //全ゲームオブジェクトのリスト
 ArrayList<GameObject> objData;
 //後でobjDataに追加するゲームオブジェクトを保存しておく。
-ArrayList<GameObject> addData = new ArrayList<GameObject>();;
+ArrayList<GameObject> addData = new ArrayList<GameObject>();
 
 //全イベントオブジェクトのリスト
 ArrayList<Event> EventList;
@@ -105,6 +105,7 @@ void draw() {
     //スペースキーを押すと、精神集中モードに入る
     if(key_input.KeyList.get("SPACE").occurrence_flag && !EventFlagList.get("Pause").flag && concentration_power > 50) {
       concentration_power-=50;
+      bonus.concentration_gauge_bonus -= 100000;
       addEvent.add(new Concentration());
     }
     if(EventFlagList.get("Loading").change_flag && !EventFlagList.get("Loading").flag) {
@@ -148,5 +149,6 @@ void draw() {
     //追加予約用リストを初期化
     addEvent  = new ArrayList<Event>();
     addData  = new ArrayList<GameObject>();
+    ScoreText_addData  = new ArrayList<Add_ScoreText_Center>();
   
 }

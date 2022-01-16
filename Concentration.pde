@@ -68,7 +68,7 @@ class Concentration_Manager extends Event{
     }
   }
   void operate() {
-    //back_render();
+    back_render();
     update();
     color_update();
     render();
@@ -76,12 +76,12 @@ class Concentration_Manager extends Event{
     time++;
   }
   void back_render() {
-    target_alpha = EventFlagList.get("Concentration").flag ? 255 : 0;
-    //集中モードに入った時、背景を暗転させる
+    target_alpha = EventFlagList.get("Concentration").flag ? 100 : 0;
+    //集中モードに入った時、背景を明転させる
     alpha += (target_alpha - alpha) /20;
     rectMode(CORNER);
     noStroke();
-    fill(#000000,alpha);
+    fill(255,alpha);
     rect(0,0,WIDTH+MARGIN,HEIGHT);
   }
 }
