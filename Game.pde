@@ -37,7 +37,7 @@ class Stage0 extends Stage {
         addEvent.add(new Communication(serif,pic));
         //EnemyAllDelete();
         //EnemyBulletAllDelete();
-        Boss boss = new Boss(new Position(10,80*ratio),1);
+        Boss boss = new Boss(new Position(10,80*ratio),3);
         addData.add(boss);
       }
       if(time > 0 && !EventFlagList.get("Pause").flag && !EventFlagList.get("Communication").flag) {
