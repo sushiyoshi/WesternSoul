@@ -88,7 +88,10 @@ class GameObjectDrawing extends Event {
       addEvent.add(new Pause());
     }
     if(EventFlagList.get("Gameover").occurrence_flag) {
-      addEvent.add(new Pause(true));
+      addEvent.add(new Pause(1));
+    }
+    if(EventFlagList.get("Gameclear").occurrence_flag) {
+      addEvent.add(new GameClear());
     }
     destroyFlag = !EventFlagList.get("Game").flag;
   }

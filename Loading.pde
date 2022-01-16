@@ -24,6 +24,7 @@ class Load extends Event implements Runnable{
     boss_1 = loadImage("cow.png");
     //inu = loadImage("inu.png");
     background = loadImage("haikei.png");
+    background2  = loadImage("title_gamen.png");
     //oni_tatie = loadImage("oni_tatie.png");
     //pause_menu = loadImage("pause_menu.png");
     pause_menu_ = loadImage("pause_menu_.png");
@@ -36,6 +37,7 @@ class Load extends Event implements Runnable{
     reloading = loadImage("reloading.png");
     player_tatie = loadImage("player_tatie.png");
     gameover = loadImage("gameover.png");
+    gameclear = loadImage("gameclear.png");
     gamestart = loadImage("gamestart.png");
     gozu = loadImage("172840.png");
     east_soul = loadImage("east_soul.png");

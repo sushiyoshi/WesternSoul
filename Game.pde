@@ -37,7 +37,7 @@ class Stage0 extends Stage {
         addEvent.add(new Communication(serif,pic));
         //EnemyAllDelete();
         //EnemyBulletAllDelete();
-        Boss boss = new Boss(new Position(10,80*ratio),3);
+        Boss boss = new Boss(new Position(10,80*ratio),1);
         addData.add(boss);
       }
       if(time > 0 && !EventFlagList.get("Pause").flag && !EventFlagList.get("Communication").flag) {
@@ -50,6 +50,7 @@ class Stage0 extends Stage {
   class Boss extends Enemy {
     int type = 0;
     int count = 0;
+    int ii = 0;
     float img_ang = 0;
     float target_img_ang = 0;
     float target_alpha = 255;
@@ -127,6 +128,7 @@ class Stage0 extends Stage {
         pl.score += defeatScore;
         addData.add(new Explosion(position.getPosition(),100.0,10.0,image));
         prev_flag=true;
+        EventFlagList.get("Gameclear").write_in_flag = true;
       }
       if(prev_flag) {
         
@@ -240,12 +242,12 @@ class Stage0 extends Stage {
             Position ipos = target_pos.getPosition();
             ipos.x += cos(rad(i*60)) * 30*ratio;
             ipos.y += sin(rad(i*60)) * 30*ratio;
-            EnemyBullet bl  =  new EnemyBullet4(position.getPosition(),i*60,2,80,i*2,ipos.getPosition());
+            EnemyBullet bl  =  new EnemyBullet4(position.getPosition(),i*60,3,80,i*2,ipos.getPosition());
             createObject(bl);
           }
         }
         if(time > 400) {
-          soul.collision_flag = 200 < time % 800 && time % 800 < 300;
+          soul.collision_flag = 200 < time % 500 && time % 500 < 300;
           if(time % 12 == 9) {
             for(int i = 0; i< 8; i++) {
               EnemyBullet bl  =  new EnemyBullet5(position.getPosition(),i*45 + sin(time*0.1)*90.0,3,time%120/10);
@@ -257,22 +259,38 @@ class Stage0 extends Stage {
           }
         }
       }else if(hp == 1) {
-        targetSkycolor.y = 0.5;
-        if(time > 15) {
-          if(time % 100 == 99) {
-            for(int i = 0;i<5;i++) {
-               float aim_ang = aim(position,pl.position.getPosition());
-               for(int j = 0; j<10; j++) {
-                 Position pos = position.getPosition();
-                 float ang = aim_ang + (i*20-40);
-                 pos.x += cos(rad(ang)) * 15*ratio;
-                 pos.y += sin(rad(ang)) * 15*ratio;
-                 EnemyBullet bl = new EnemyBullet1(pos,ang,j*0.5+3);
-                 createObject(bl);
-               }
-             }
+        if(time == 1) {
+          targetSkycolor.y = 0.5;
+          count = 0;
+        }
+        if(time %250 == 80) {
+          targetMode(new Position(160*ratio + random(100,180) * (1 - 2*random(0,1)),200*ratio + random(100,200) * (1 - 2*random(0,1))),40,1.5*ratio);
+        }
+        if(200 < time % 500 && time % 500 < 400 && time > 1000) {
+          soul.collision_flag = true;
+        } else {
+          soul.collision_flag = false;
+        }
+        //if(100 < time && time <= 180) {
+        //  if(time % 10 == 0) {
+        //    float ang = 45*(time-100)/10;
+        //    EnemyBullet bl =  new EnemyBullet7(position.getPosition(),ang);
+        //    createObject(bl);
+        //  }
+        //}
+        if(time == 100) {
+          for(int i = 0; i< 8; i++) {
+            float ang = 45*i;
+            EnemyBullet bl =  new EnemyBullet7(position.getPosition(),ang,i);
+            createObject(bl);
           }
         }
+        ii += sin((time-100)*0.012)*10;
+        if(time % (max(100,800-count*100)) == 0 && time != 0){
+          count++;
+          println("count",count);
+        }
+        count = min(4,count);
       }
     }
     class EnemyBullet0 extends EnemyBullet {
@@ -394,7 +412,7 @@ class Stage0 extends Stage {
               float ang = k + i * 180;
               pos.x += cos(rad(ang)) * 20*ratio;
               pos.y += sin(rad(ang)) * 20*ratio;
-              EnemyBullet bl  = new EnemyBullet3(pos,ang,5,col);
+              EnemyBullet bl  = new EnemyBullet3(pos,ang,3,col);
               createObject(bl);
             }
             k+=6;
@@ -411,51 +429,95 @@ class Stage0 extends Stage {
           soul.collider_size = size/20;
       }
     }
-  }
-    class Enemy0 extends Enemy {
-    Enemy0(Position position,int hp) {
-      super(position,hp);
-      speed = 2.0*ratio;        
-      image = cowboy;
-      size = 30.0*ratio;
-      soul.collider_size = 5*ratio;
-    }
-    void render() {
-      imageMode(CENTER);
-      noTint();
-      if(image != null)image(image,position.x,position.y,size,size*1.8);
-      
-    }
-    void operate() {  
-      if(time % 100 == 1 && (time / 100) <= 3) { 
-        for(int i = 0; i<18; i++) {
-          EnemyBullet0 bl = new EnemyBullet0(this.position.getPosition(),i*20);
-          createObject(bl);
-        }
-      }
-    }
-    class EnemyBullet0 extends EnemyBullet {
-      float accele;
-      EnemyBullet0(Position pos,float ang) {
+    class EnemyBullet6 extends EnemyBullet {
+      Position target_pos = new Position(0,0);
+      int num  = 0;
+      EnemyBullet6(Position pos, float ang,float speed,Position target_pos,int num) {
         super(pos);
         this.ang = ang;
-        this.image = BulletImage.get("bullet0-1");
-        addData.add(new Explosion(position.getPosition(),70,10,image));
+        this.speed = speed*ratio;
+        this.image = BulletImage.get("bullet4-12");
+        this.target_pos = target_pos;
+        size =20*ratio;
+        addData.add(new Appearance(position.getPosition(),size,15,image));
+        this.num =num;
       }
       void operate() {
-        if(time == 0) {
-          speed = 4.0;
-          accele = -0.1;
+        if(time == 1) {
+          targetMode(target_pos.getPosition(),10,100);
         }
-        if(time == 10) {
-          speed = 0.0;
-          accele = 0.0;
+        if(time == 40) {
+          image = BulletImage.get("bullet0-0");
         }
-        if(time ==  100) {
-          speed = 2.0;
+        if(time == 50) {
           ang = aim(position,pl.position.getPosition());
+          target_pos = new Position(position.x + cos(rad(ang))* 50,position.y + sin(rad(ang))* 50);
+          targetMode(target_pos.getPosition(),10,50);
+          image = BulletImage.get("bullet4-0");
         }
+        if(time == 140) {
+          image = BulletImage.get("bullet0-9");
+        }
+        if(time == 150) {
+          ang = aim(position,pl.position.getPosition());
+          speed = 10;
+          moveType = "DEFAULT";
+          image = BulletImage.get("bullet4-9");
+        }
+        
       }
-    }
+      void render() {
+        imageMode(CENTER);
+        noTint();
+        pushMatrix();
+        translate( position.x , position.y );
+        rotate(rad(ang+90));
+        imageMode(CENTER);
+        //if(phase == 1)image(image,0,0,size,size*1.4); else image(image,0,0,size,size);
+        image(image,0,0,size,size);
+        popMatrix();
+      }
+     }
+     class EnemyBullet7 extends EnemyBullet {    
+       float radi = 0;
+       float target_radi = 90;
+       EnemyBullet7(Position pos,float ang,int num) {
+         super(pos);
+         this.ang = ang;
+         image = gozu;
+         size = 50;
+         time += num * 10;
+         
+       }
+       void update() {
+         radi += (target_radi-radi)/30;
+         //println(floor(ang),floor(a),floor(ang+a));
+         position.x = Boss.this.position.x + cos(rad(ang+Boss.this.ii))* radi;
+         position.y = Boss.this.position.y + sin(rad(ang+Boss.this.ii))* radi;
+       }
+       void operate() {
+         int temp = 250-Boss.this.count * 25;
+         if(time % temp  == floor(temp*0.6)) {
+           float aim_ang = Boss.this.ii + ang+90;
+           for(int i = 0; i<16; i++) {
+             //Position pos = position.getPosition();
+             //float ang = aim_ang + (i*20-40);
+             //pos.x += cos(rad(ang)) * 15*ratio;
+             //pos.y += sin(rad(ang)) * 15*ratio;
+             //EnemyBullet bl = new EnemyBullet1(pos,ang,j*0.5+3);
+             Position pos = position.getPosition();
+             Position target_pos = position.getPosition();
+             pos.x += cos(rad(aim_ang)) * 15*ratio;
+             pos.y += sin(rad(aim_ang)) * 15*ratio;
+             target_pos.x += cos(rad(aim_ang)) * (i*5*ratio + 100);
+             target_pos.y += sin(rad(aim_ang)) * (i*5*ratio + 100);
+             EnemyBullet bl = new EnemyBullet6(pos.getPosition(),rad(aim_ang),0,target_pos.getPosition(),i);
+             //EnemyBullet6(Position pos, float ang,float speed,Position target_pos)
+             createObject(bl);
+           }
+         }
+       }
+       
+     }
   }
 }

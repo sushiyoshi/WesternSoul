@@ -119,7 +119,7 @@ abstract class Stage extends Event {
 
 //敵が発射する弾
 class EnemyBullet extends EnemyObject{
-  int score = 10000;
+  int score = 100000;
   EnemyBullet(Position pos) {
     this.colider_target = 0;
     this.position =pos;

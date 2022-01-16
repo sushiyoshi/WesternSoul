@@ -7,7 +7,7 @@ class Pause extends Event{
   PImage Pause_menu_ = pause_menu_;
   int phase = 0;
   boolean choiced_flag = false;
-  boolean option = false;
+  int option = 0;
   Pause() {
     this.layer = 6;
     EventFlagList.get("Pause").write_in_flag = true;
@@ -18,13 +18,13 @@ class Pause extends Event{
     ChoiceTextList.add(new ToTitle(360*ratio));
     ChoiceTextList.add(new Retry(400*ratio));
   }
-  Pause(boolean option) {
+  Pause(int option) {
     //GameOver
-    println("GAMEOVER");
+    if(option==1)println("GAMEOVER");
     this.layer = 6;
     this.option = option;
     EventFlagList.get("Pause").write_in_flag = true;
-    Pause_menu_ = gameover;
+    Pause_menu_ = option==2 ? gameclear : gameover;
     dark = new Darkening();
     ChoiceTextList  = new ArrayList<ChoiceText>();
     ChoiceTextList.add(new ToTitle(360*ratio));
@@ -58,11 +58,12 @@ class Pause extends Event{
       phase = min(phase,chtext.animator.phase);
       i++;
     }
-    if(phase == 1 && (key_input.KeyList.get("W").occurrence_flag || (key_input.KeyList.get("ALT").occurrence_flag && !option)) && !choiced_flag) {
+    if(phase == 1 && (key_input.KeyList.get("W").occurrence_flag || (key_input.KeyList.get("ALT").occurrence_flag && option==0)) && !choiced_flag) {
       if(key_input.KeyList.get("W").occurrence_flag){
         choiced_flag = true;
         if(c!=0)blackout.FadeIn();
-        if(option) EventFlagList.get("Gameover").write_in_flag = false;
+        if(option==1) EventFlagList.get("Gameover").write_in_flag = false;
+        if(option==2) EventFlagList.get("Gameclear").write_in_flag = false;
       }
       Destroy();
     }

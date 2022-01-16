@@ -16,10 +16,18 @@ class Title extends Event {
     //textFont(serifFont);
     //textAlign(CORNER);
     //rectMode(CENTER);
+    //imageMode(CORNER);
+    //image(background2,0,0,1000,750);
+    //sd.set("time", millis() / (1000.0));
+    //sd.set("resolution", (float)width, (float)height);  
+    //sd.set("skycolor",0.2,0.1,0.9);
+    //filter(sd);
     imageMode(CENTER);
     //image(title,1000/2,750/2,620*ratio,620*ratio);
     logo.render();
-    if(press_ok_flag)drawOutlineText("press the w key",250*ratio,400*ratio,25,255,0,sin(time/5)*255 - 255/2);
+    textFont(stateFont);
+     textAlign(CENTER);
+    if(press_ok_flag)drawOutlineText("press the w key",1000/2,400*ratio,25,255,0,sin(time/5)*255 - 255/2);
     if(blackout.endflag && start_flag) { 
       println("start");
       addEvent.add(new Initialize());

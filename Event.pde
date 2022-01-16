@@ -33,6 +33,19 @@ class EventStateManager {
     }
   }
 }
+class GameClear extends Event {
+  int time = 0;
+  GameClear() {
+  }
+  void operate() { 
+    destroyFlag = !EventFlagList.get("Game").flag;
+    if(time > 150) {
+      destroyFlag = true;
+      addEvent.add(new Pause(2));
+    }
+    if(!EventFlagList.get("Pause").flag)time++;
+  }
+}
 
 void EnemyAllDelete() {
   DestroyFlagList.get("Enemy").write_in_flag = !DestroyFlagList.get("Enemy").write_in_flag;

@@ -1,3 +1,7 @@
+//This code is based on the following code :https://www.shadertoy.com/view/MlccDf
+
+
+
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -5,7 +9,7 @@ precision mediump float;
 uniform float time;
 uniform vec2 resolution;
 uniform vec3 skycolor;
-
+//from:https://www.shadertoy.com/view/MlccDf
 float map(vec3 p){
     
     p.z += time;
@@ -13,7 +17,7 @@ float map(vec3 p){
     h += dot(sin(p*2. - cos(p.yzx*1.3*2.)), vec3(.1/2.));
     return p.y + 1. + h;     
 }
-
+//from:https://www.shadertoy.com/view/MlccDf
 vec3 getNormal(vec3 p)
 {
     vec2 e = vec2(0.0035, -0.0035); 
@@ -23,7 +27,7 @@ vec3 getNormal(vec3 p)
         e.yxy * map(p + e.yxy) + 
         e.xxx * map(p + e.xxx));
 }
-
+//from:https://www.shadertoy.com/view/MlccDf
 vec3 col(vec3 ro, vec3 rd, vec3 norm, float md, float t)
 {   
     // light direction
@@ -51,7 +55,7 @@ vec3 col(vec3 ro, vec3 rd, vec3 norm, float md, float t)
     return sceneCol;
     
 }
-
+//from:https://www.shadertoy.com/view/MlccDf
 void main()
 {
     vec2 uv = 2.0 * vec2(gl_FragCoord.xy - 0.5*resolution.xy)/resolution.y; 

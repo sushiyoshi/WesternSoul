@@ -60,9 +60,9 @@ ArrayList<Event> EventList;
 ArrayList<Event> addEvent;
 
 //画像データ
-PImage player_text,score_text,boss_1,background,
+PImage player_text,score_text,boss_1,background,background2,
 pause_menu,continue_,retry,return_to_title,pause_menu_,cowboy,title,concentration,
-reloading,player_tatie,gameover,quit,gamestart,
+reloading,player_tatie,gameover,quit,gamestart,gameclear,
 title2_gunman_shadow,title2_text_shadow,title2_gun_shadow,title2_text_eng,title2_gun,title2_text,title2_gunman,gozu,magic_circle,east_soul;
 //フォントデータ
 PFont stateFont,serifFont,pauseFont,scoreFont;
@@ -94,6 +94,7 @@ void setup() {
   EventFlagList.put("Concentration",new EventState());
   EventFlagList.put("Loading",new EventState());
   EventFlagList.put("Gameover",new EventState());
+  EventFlagList.put("Gameclear",new EventState());
   DestroyFlagList.put("Enemy",new EventState());
   DestroyFlagList.put("EnemyBullet",new EventState());
   //ローディング開始

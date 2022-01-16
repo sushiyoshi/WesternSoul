@@ -2,11 +2,11 @@ class ScoreText extends Effect {
   boolean destroyFlag = false;
   Position position;
   float target_y;
-  float score;
+  int score;
   int time=0;
   int frame = 20;
   color cl=color(255);
-  ScoreText(Position position,float score) {
+  ScoreText(Position position,int score) {
     this.position=position;
     target_y = position.y-10;
     this.score=score;
@@ -196,7 +196,7 @@ class Bonus {
   int hard_shot = 0;
   float timer_zero = 0;
   void new_score() {
-    fast_shot = max(0,100000000 - floor(millis() / (1000.0) - timer_zero));
+    fast_shot = max(0,1000000 - floor(millis() / (1000.0) - timer_zero));
     fast_shot = floor(fast_shot/100000) * 100000;
     concentration_gauge_bonus += concentration_power * 1000000;
     ScoreText_addData.add(new Add_ScoreText_Center("DirectHit!",-1));
