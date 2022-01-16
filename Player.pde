@@ -1,5 +1,5 @@
 abstract class Player extends GameObject{
-  int score=0;
+  long score=0;
   //boolean deadFlag = false;
   //boolean controlFlag = true;
   Player (Position position,float size,float speed) {
@@ -22,11 +22,11 @@ abstract class Player extends GameObject{
       //} else {
       //  deadProcessing();
       //}
-      if(soul.collision) {
-        EventFlagList.get("Gameover").write_in_flag = true;
-        soul.collision = false;
-        destroyFlag = true;
-      }  
+      //if(soul.collision) {
+      //  EventFlagList.get("Gameover").write_in_flag = true;
+      //  soul.collision = false;
+      //  destroyFlag = true;
+      //}  
       //if(controlFlag) {
         float sp = (key_input.KeyList.get("SHIFT").flag ? speed/2.5 : speed) * base_speed;
         if (key_input.KeyList.get("RIGHT").flag) position.x+=sp;

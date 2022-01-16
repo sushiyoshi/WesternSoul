@@ -1,4 +1,5 @@
 //弾幕、敵キャラの動作や会話など、ゲームの内容を設定する
+int bosshp = 0;
 class Stage0 extends Stage {
   int step = 0;
   Position[] Enemy0Pattern = {
@@ -62,6 +63,7 @@ class Stage0 extends Stage {
       soul.fireball.out_cl = #ff8c00;
       soul.collision_flag = false;
       magicCircle = new MagicCircle();
+      bosshp = hp;
     }
     class MagicCircle {
       Position position;
@@ -81,6 +83,7 @@ class Stage0 extends Stage {
         position.y = Boss.this.position.y;
         outer_position.x += (position.x-outer_position.x)/10;
         outer_position.y += (position.y-outer_position.y)/10;
+        bosshp = hp;
       }
       void render() {
         stroke(80,100);
@@ -242,7 +245,7 @@ class Stage0 extends Stage {
           }
         }
         if(time > 400) {
-          soul.collision_flag = 200 < time % 1000 && time % 1000 < 300;
+          soul.collision_flag = 200 < time % 800 && time % 800 < 300;
           if(time % 12 == 9) {
             for(int i = 0; i< 8; i++) {
               EnemyBullet bl  =  new EnemyBullet5(position.getPosition(),i*45 + sin(time*0.1)*90.0,3,time%120/10);
@@ -341,7 +344,7 @@ class Stage0 extends Stage {
             time =0;
           }
         } else if(phase == 1) {
-          if(time > 50) {
+          if(time > 80) {
             speed = 4;
           }
         }
@@ -394,7 +397,7 @@ class Stage0 extends Stage {
               EnemyBullet bl  = new EnemyBullet3(pos,ang,5,col);
               createObject(bl);
             }
-            k+=4;
+            k+=6;
           }
         }
       }

@@ -1,6 +1,7 @@
 class Frame extends Event {
   float alpha = 0,frame = 40;
-  int disp_score = 0;
+  long disp_score = 0;
+  float score_y = 60*ratio;
   TitleLogo logo = new TitleLogo(new Position(1000/2*ratio,620/2*ratio),620*ratio);
   Frame() {
     this.layer = 10;
@@ -18,7 +19,7 @@ class Frame extends Event {
     imageMode(CORNER);
     image(background,0,0,1000,750);
     imageMode(CENTER);
-    image(score_text,400*ratio,112*ratio,80*ratio,40*ratio);
+    image(score_text,400*ratio,score_y+10*ratio,80*ratio,40*ratio);
   }
   
   void logo() {
@@ -41,14 +42,22 @@ class Frame extends Event {
     disp_score += (pl.score - disp_score) /20;
     textFont(stateFont);
     textAlign(CORNER);
-    String score_text = Integer.toString(disp_score);
+    String score_text = Long.toString(disp_score);
     int len = score_text.length();
     for(int i = 12; i > len && i > 0; i--) {
       score_text = '0' + score_text;
     }
     fill(255,255);
-    drawOutlineText(score_text,465*ratio,100*ratio,23*ratio,255,0,255);
+    drawOutlineText(score_text,465*ratio,score_y,23*ratio,255,0,255);
     //text(score_text,465*ratio,63*ratio,23*ratio,255);
+  }
+  void east_soul() {
+    imageMode(CENTER);
+    noTint();
+    image(east_soul,480*ratio,score_y+80*ratio,100*ratio,66*ratio);
+    textAlign(CENTER);
+    textFont(stateFont);
+    drawOutlineText(Integer.toString(bosshp),540*ratio,score_y+65*ratio,40*ratio,255,0,255);
   }
   void operate() {
     imageMode(CORNER);
@@ -57,6 +66,7 @@ class Frame extends Event {
     logo();
     //image(window,15,320,340,150);
     score();
+    east_soul();
     destroyFlag = !EventFlagList.get("Game").flag;
   }
 }

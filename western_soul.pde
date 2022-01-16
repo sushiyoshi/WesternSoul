@@ -63,7 +63,7 @@ ArrayList<Event> addEvent;
 PImage player_text,score_text,boss_1,background,
 pause_menu,continue_,retry,return_to_title,pause_menu_,cowboy,title,concentration,
 reloading,player_tatie,gameover,quit,gamestart,
-title2_gunman_shadow,title2_text_shadow,title2_gun_shadow,title2_text_eng,title2_gun,title2_text,title2_gunman,gozu,magic_circle;
+title2_gunman_shadow,title2_text_shadow,title2_gun_shadow,title2_text_eng,title2_gun,title2_text,title2_gunman,gozu,magic_circle,east_soul;
 //フォントデータ
 PFont stateFont,serifFont,pauseFont,scoreFont;
 
@@ -105,7 +105,7 @@ void draw() {
     //スペースキーを押すと、精神集中モードに入る
     if(key_input.KeyList.get("SPACE").occurrence_flag && !EventFlagList.get("Pause").flag && concentration_power > 50) {
       concentration_power-=50;
-      bonus.concentration_gauge_bonus -= 100000;
+      bonus.concentration_gauge_bonus -= 1000000;
       addEvent.add(new Concentration());
     }
     if(EventFlagList.get("Loading").change_flag && !EventFlagList.get("Loading").flag) {

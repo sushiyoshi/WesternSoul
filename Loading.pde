@@ -38,6 +38,7 @@ class Load extends Event implements Runnable{
     gameover = loadImage("gameover.png");
     gamestart = loadImage("gamestart.png");
     gozu = loadImage("172840.png");
+    east_soul = loadImage("east_soul.png");
     magic_circle = loadImage("aiueo.png");
     title2_gunman_shadow = loadImage("title2_gunman_shadow.png");
     title2_text_shadow = loadImage("title2_text_shadow.png");
