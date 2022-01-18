@@ -8,6 +8,7 @@ class KeyInput {
     KeyList.put("SHIFT",new EventState());
     KeyList.put("Z",new EventState());
     KeyList.put("X",new EventState());
+    KeyList.put("C",new EventState());
     KeyList.put("W",new EventState());
     KeyList.put("A",new EventState());
     KeyList.put("S",new EventState());
@@ -37,6 +38,7 @@ void keyPressed() {
     if (keyCode == 'S') key_input.KeyList.get("S").write_in_flag = true;
     if (keyCode == 'W') key_input.KeyList.get("W").write_in_flag = true;
     if (keyCode == 'D') key_input.KeyList.get("D").write_in_flag = true;
+    if (keyCode == 'C') key_input.KeyList.get("C").write_in_flag = true;
     if (keyCode == ' ') key_input.KeyList.get("SPACE").write_in_flag = true;
     if (keyCode == CONTROL) key_input.KeyList.get("CONTROL").write_in_flag = true;
     if (keyCode == ESC) key_input.KeyList.get("ESC").write_in_flag = true;
@@ -54,6 +56,7 @@ void keyReleased() {
     if (keyCode == 'D') key_input.KeyList.get("D").write_in_flag = false;
     if (keyCode == 'S') key_input.KeyList.get("S").write_in_flag = false;
     if (keyCode == 'W') key_input.KeyList.get("W").write_in_flag = false;
+    if (keyCode == 'C') key_input.KeyList.get("C").write_in_flag = false;
     if (keyCode == ' ') key_input.KeyList.get("SPACE").write_in_flag = false;
     if (keyCode == CONTROL) key_input.KeyList.get("CONTROL").write_in_flag = false;
     if (keyCode == ESC) key_input.KeyList.get("ESC").write_in_flag = false;

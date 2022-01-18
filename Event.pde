@@ -36,14 +36,27 @@ class EventStateManager {
 class GameClear extends Event {
   int time = 0;
   GameClear() {
+    println("RING");
   }
   void operate() { 
     destroyFlag = !EventFlagList.get("Game").flag;
-    if(time > 150) {
-      destroyFlag = true;
-      addEvent.add(new Pause(2));
+    if(time == 150) {
+      Serif[] serif = {
+        new Serif("test\n","gunman"),
+      };
+      Picture[] pic = {
+        new Picture(player_tatie,"gunman",true),
+        new Picture(boss_1,"Gozu",false)
+      };
+      //com = new Communication(serif,pic);
+      addEvent.add(new Communication(serif,pic));
     }
     if(!EventFlagList.get("Pause").flag)time++;
+    if(time > 200 && !EventFlagList.get("Pause").flag && !EventFlagList.get("Communication").flag) {
+       destroyFlag = true;
+       addEvent.add(new Pause(2));
+       println("OMAFAFAFA");
+    }
   }
 }
 

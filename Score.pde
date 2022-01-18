@@ -91,10 +91,10 @@ class ScoreSoul extends Soul {
   }
 }
 ArrayList<Add_ScoreText_Center> ScoreText_addData;
-class ScoreText_Center_Maneger extends Event{
+class ScoreText_Center_Manager extends Event{
   ArrayList<ScoreText_Center> ScoreText_CenterList = new ArrayList<ScoreText_Center>();
   int num = 0;
-  ScoreText_Center_Maneger() {
+  ScoreText_Center_Manager() {
     layer = 5;
     ScoreText_addData = new ArrayList<Add_ScoreText_Center>();
   }

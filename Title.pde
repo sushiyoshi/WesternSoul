@@ -49,19 +49,19 @@ class TitleLogo {
   Position position = new Position(0,0);
   float size = 620*ratio;
   //Position title2_text_pos = new Position(0,0);
-  HashMap<String,Peace> PeaceList = new HashMap<String,Peace>();
+  HashMap<String,Piece> PieceList = new HashMap<String,Piece>();
   TitleLogo(Position position,float size) {
     this.position = position;
     this.size =size;
     int startFrame = 20;
-    PeaceList.put("title2_gunman_shadow" ,new Peace(title2_gunman_shadow,new Position(position.x -20,position.y),620*ratio,0, startFrame+60));
-    PeaceList.put("title2_gunman" ,new Peace(title2_gunman,new Position(position.x -20,position.y),620*ratio,0, startFrame));
-    PeaceList.put("title2_text_shadow" ,new Peace(title2_text_shadow,this.position.getPosition(),620*ratio,20, startFrame + 20));
-    PeaceList.put("title2_gun_shadow" ,new Peace(title2_gun_shadow,new Position(position.x +20,position.y),620*ratio,0, startFrame+60));
-    PeaceList.put("title2_gun" ,new Peace(title2_gun,new Position(position.x +20,position.y),620*ratio,0, startFrame));
-    PeaceList.put("title2_text" ,new Peace(title2_text,this.position.getPosition(),620*ratio,45, startFrame + 20));
-    PeaceList.put("title2_text_eng" ,new Peace(title2_text_eng,this.position.getPosition(),620*ratio,-30, startFrame + 30));
-    //PeaceList.put("title2_text" ,new Peace(this.position.getPosition(),620*ratio,45,30));
+    PieceList.put("title2_gunman_shadow" ,new Piece(title2_gunman_shadow,new Position(position.x -20,position.y),620*ratio,0, startFrame+60));
+    PieceList.put("title2_gunman" ,new Piece(title2_gunman,new Position(position.x -20,position.y),620*ratio,0, startFrame));
+    PieceList.put("title2_text_shadow" ,new Piece(title2_text_shadow,this.position.getPosition(),620*ratio,20, startFrame + 20));
+    PieceList.put("title2_gun_shadow" ,new Piece(title2_gun_shadow,new Position(position.x +20,position.y),620*ratio,0, startFrame+60));
+    PieceList.put("title2_gun" ,new Piece(title2_gun,new Position(position.x +20,position.y),620*ratio,0, startFrame));
+    PieceList.put("title2_text" ,new Piece(title2_text,this.position.getPosition(),620*ratio,45, startFrame + 20));
+    PieceList.put("title2_text_eng" ,new Piece(title2_text_eng,this.position.getPosition(),620*ratio,-30, startFrame + 30));
+    //PieceList.put("title2_text" ,new Piece(this.position.getPosition(),620*ratio,45,30));
   }
   void render() {
     //title2_gunman_shadow,title2_text_shadow,title2_gun_shadow,title2_text_eng,title2_gun,title2_text
@@ -73,11 +73,11 @@ class TitleLogo {
     //image(title2_gun,position.x,position.y,size,size);
     //image(title2_text,title2_text_pos.x,title2_text_pos.y,size,size);
     //image(title2_text_eng,position.x,position.y,size,size);
-    for(String k: PeaceList.keySet()) {
-      PeaceList.get(k).render();
+    for(String k: PieceList.keySet()) {
+      PieceList.get(k).render();
     }
   }
-  class Peace {
+  class Piece {
     Position position = new Position(0,0);
     float alpha = 0;
     float targetAlpha = 0;
@@ -89,10 +89,9 @@ class TitleLogo {
     int time = 0;
     int targetTime = 0;
     PImage img;
-    Peace(PImage img,Position position,float size,float ang,int targetTime) {
-    //Peace(Position position,float size,float ang,int targetTime) {
+    Piece(PImage img,Position position,float size,float ang,int targetTime) {
+    //Piece(Position position,float size,float ang,int targetTime) {
       this.position = position;
-      println("peace:",position.x);
       this.size =size;
       this.ang = ang;
       this.targetTime = targetTime;
@@ -135,7 +134,7 @@ class Initialize extends Event {
     addEvent.add(new Concentration_Manager());
     addEvent.add(new PlayerBulletManager());
     addEvent.add(new SoulManager());
-    addEvent.add(new ScoreText_Center_Maneger());
+    addEvent.add(new ScoreText_Center_Manager());
     EventFlagList.get("Concentration").write_in_flag = false;
     destroyFlag = true;
     blackout.FadeOut();

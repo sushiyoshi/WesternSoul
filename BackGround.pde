@@ -20,9 +20,9 @@ class BackGround extends Event{
      sd.set("resolution", (float)width, (float)height);  
      sd.set("skycolor",skycolor.x,skycolor.y,skycolor.z);
      filter(sd);
-     destroyFlag = !EventFlagList.get("Game").flag;
      skycolor.x += (targetSkycolor.x-skycolor.x)/30;
      skycolor.y += (targetSkycolor.y-skycolor.y)/30;
      skycolor.z += (targetSkycolor.z-skycolor.z)/30;
+     destroyFlag = !EventFlagList.get("Game").flag;
   }
 }

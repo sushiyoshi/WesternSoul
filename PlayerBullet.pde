@@ -22,7 +22,7 @@ class PlayerBulletManager extends Event{
       draw_aim(pl.position.getPosition(),130*ratio,angle,60*ratio,frameCount*2,50,time > 0);
       //if(time < 0 && key_input.KeyList.get("W").occurrence_flag && !pl.deadFlag && !EventFlagList.get("Communication").flag) {
         if(time < 0 && key_input.KeyList.get("W").occurrence_flag && !EventFlagList.get("Communication").flag) {
-         time= 300;
+         time= 100;
          PlayerBullet plb = new PlayerBullet(pl.position.getPosition(),angle);
          addData.add(plb);
          PlayerBulletList.add(plb);
