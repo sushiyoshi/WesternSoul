@@ -1,9 +1,5 @@
 
 <img width="500" alt="スクリーンショット 2022-01-16 20 47 03" src="https://user-images.githubusercontent.com/41273823/150776895-278428f4-c242-44e8-96d7-7e81cca971ae.png">
-<img width="500" alt="スクリーンショット 2022-01-16 21 14 39" src="https://user-images.githubusercontent.com/41273823/150776887-c20da816-2ab5-44d1-9235-d04401e1f1e0.png">
-<img width="500" alt="スクリーンショット 2022-01-17 17 35 27" src="https://user-images.githubusercontent.com/41273823/150776590-3a4a69cb-7087-4f38-bc0f-64dc3e9075b4.png">
-<img width="500" alt="スクリーンショット 2022-01-17 11 47 20" src="https://user-images.githubusercontent.com/41273823/150776900-2a702337-dd35-4250-ab12-558fccc81371.png">
-
 
 # 1,タイトル  
 西魂（ウエスタンソウル）
@@ -52,7 +48,13 @@
 # 6,動作環境
 Processing 3.0、及び4.0で正しく動作することを確認。
 
-# 7,使用素材
+# 7,トラブルシューティング  
+Q. ソースコードをダウンロードして,Processing上で動かそうとしたのですが、エラーが出て動きません.  
+A.　ディレクトリの名前は「western_soul」になっていますか？ Processingの仕様で,「western_soul-main」のままだと動きません.  
+
+Q. ReleaseからダウンロードしたMacの実行ファイルを実行しようとしたら,「アプリケーション“western_soul”を開くためのアクセス権がありません」と言われて動きませんでした.  
+A. ターミナルで,「open -a western_soul.app」を実行してみて下さい.  
+# 8,使用素材
  ・自機  
  シルエットAC様  
  https://www.silhouette-ac.com/detail.html?id=172912&ct=  
@@ -89,7 +91,7 @@ Processing 3.0、及び4.0で正しく動作することを確認。
  VF-Whitehall  
  https://www.fontsquirrel.com/fonts/whitehall  
 
-# 8,参考にさせていただいたサイト様  
+# 9,参考にさせていただいたサイト様  
 ## 当たり判定  
 その８ 4分木空間分割を最適化する！（理屈編）  
 http://marupeke296.com/COL_2D_No8_QuadTree.html  
