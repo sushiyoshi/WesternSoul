@@ -1,3 +1,10 @@
+
+<img width="500" alt="スクリーンショット 2022-01-16 20 47 03" src="https://user-images.githubusercontent.com/41273823/150776895-278428f4-c242-44e8-96d7-7e81cca971ae.png">
+<img width="500" alt="スクリーンショット 2022-01-16 21 14 39" src="https://user-images.githubusercontent.com/41273823/150776887-c20da816-2ab5-44d1-9235-d04401e1f1e0.png">
+<img width="500" alt="スクリーンショット 2022-01-17 17 35 27" src="https://user-images.githubusercontent.com/41273823/150776590-3a4a69cb-7087-4f38-bc0f-64dc3e9075b4.png">
+<img width="500" alt="スクリーンショット 2022-01-17 11 47 20" src="https://user-images.githubusercontent.com/41273823/150776900-2a702337-dd35-4250-ab12-558fccc81371.png">
+
+
 # 1,タイトル  
 西魂（ウエスタンソウル）
 
@@ -138,11 +145,5 @@ https://wgld.org/d/webgl/w060.html
 
 GLSLでsmoothstepみたいな線形補間  
 https://qiita.com/aa_debdeb/items/1165b98ec596ee20b519  
-![image](https://user-images.githubusercontent.com/41273823/150776313-725cdebc-e7b9-4b86-8f37-db534d63421e.png)
-
-<img width="1001" alt="スクリーンショット 2022-01-16 20 47 03" src="https://user-images.githubusercontent.com/41273823/150776895-278428f4-c242-44e8-96d7-7e81cca971ae.png">
-<img width="991" alt="スクリーンショット 2022-01-16 21 14 39" src="https://user-images.githubusercontent.com/41273823/150776887-c20da816-2ab5-44d1-9235-d04401e1f1e0.png">
-<img width="994" alt="スクリーンショット 2022-01-17 17 35 27" src="https://user-images.githubusercontent.com/41273823/150776590-3a4a69cb-7087-4f38-bc0f-64dc3e9075b4.png">
-<img width="993" alt="スクリーンショット 2022-01-17 11 47 20" src="https://user-images.githubusercontent.com/41273823/150776900-2a702337-dd35-4250-ab12-558fccc81371.png">
 
 
