@@ -1,5 +1,8 @@
 
 <img width="500" alt="スクリーンショット 2022-01-16 20 47 03" src="https://user-images.githubusercontent.com/41273823/150776895-278428f4-c242-44e8-96d7-7e81cca971ae.png">
+<img width="996" alt="スクリーンショット 2022-03-01 22 49 41" src="https://user-images.githubusercontent.com/41273823/156181920-d1ec44be-fd52-43a3-b968-852e7bdec2d2.png">
+<img width="998" alt="スクリーンショット 2022-03-01 22 51 53" src="https://user-images.githubusercontent.com/41273823/156182035-cdf80eaa-b75e-4b0e-91ca-ad3e8e1295b2.png">
+<img width="989" alt="スクリーンショット 2022-03-01 22 54 33" src="https://user-images.githubusercontent.com/41273823/156182049-690e3ad5-9f5d-4b53-8797-844c7a883803.png">
 
 # 1,タイトル  
 西魂（ウエスタンソウル）
