@@ -4,6 +4,14 @@
 <img width="998" alt="スクリーンショット 2022-03-01 22 51 53" src="https://user-images.githubusercontent.com/41273823/156182035-cdf80eaa-b75e-4b0e-91ca-ad3e8e1295b2.png">
 <img width="989" alt="スクリーンショット 2022-03-01 22 54 33" src="https://user-images.githubusercontent.com/41273823/156182049-690e3ad5-9f5d-4b53-8797-844c7a883803.png">
 
+# 0,プレイ方法
+下のリリースのリンクから対応する実行環境の実行ファイルを選択してダウンロードしてください。
+ただし、動作確認が充分に行われていないため、環境によっては動作しない可能性がございます。
+まだ制作途中なのでご容赦ください。
+https://github.com/sushiyoshi/WesternSoul/releases
+Processingの開発環境がある方は、ソースコードをダウンロードしてProcessing上で直接動かした方が確実に動作すると思います。
+
+
 # 1,タイトル  
 西魂（ウエスタンソウル）
 
